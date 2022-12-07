@@ -1,0 +1,108 @@
+/* Color variables and the background color*/
+body {
+    --color-primary: rgb(32, 32, 32);
+    --color-primary-light: rgb(121, 121, 121);
+    --color-secondary: rgb(230, 163, 75);
+    --color-secondary-light: white;
+    background-color: var(--color-primary-light);
+}
+
+/* Container for the search bar */
+#container{
+	text-align: center;
+    width: 600px;
+    max-width: 600px;
+    margin: 0 auto; 
+	margin-top: 10rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: var(--color-primary);
+}
+
+/* Menu bar general*/
+#menubar{
+    background-color: var(--color-primary);
+    position: fixed;
+    width: 100%;
+	top: 0;
+	left: 0; 
+	right: 0;
+}
+
+/* Design for the links*/
+#menubar a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    float:left;
+    display: block;
+    color: var(--color-secondary-light);
+    text-align: center;
+    padding: 13px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+/* Right-aligned section*/
+.menubar-right{
+    float: right;
+}
+
+/* Changes when the mouse hovers*/
+#menubar a:hover {
+    background-color:var(--color-secondary);
+    color: black;
+}
+
+/* Search bar */
+.search input[type=text]{
+    width: 500px;
+    height: 25px;
+    border-radius: 1px;
+    border: none;
+}
+.search{
+   	float: inherit;
+    margin: 8px;
+}
+
+/* Design for the search button*/
+.search button{
+    background-color: var(--color-primary);
+    color: var(--color-secondary-light);
+    float: right;
+    padding: 5px 10px;
+    margin-top: 1px;
+    margin-right: 16px;
+    margin-left: 16px;
+    font-size: 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Changes when clicked*/
+.search button :active{
+    transform: scale(0.98);
+}
+
+/* Search icon size*/
+.search i{
+    font-size:18px;
+}
+
+/* Login/Sign-up align*/
+.LogSig{
+    float: right;
+}
+
+
+/* Title design*/
+#title h1{
+	text-align: center;
+	margin-top: 5rem;
+	color: var(--color-secondary-light);
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	text-shadow: 1px 1px var(--color-primary);
+	
+		
+}

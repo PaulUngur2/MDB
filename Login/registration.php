@@ -1,148 +1,78 @@
 <?php
 
-//Connecting to the database
+// Connecting to the database
 require_once __DIR__ . '/login-config.php';
 global $mysqli;
 
-//Initializing with empty values
-$username = $email = $password = $confirmPassword = "";
-$usernameError = $emailError = $passwordError = $confirmPasswordError = "";
+// Waiting until the data was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+// Checking if the data is submitted
+    if (!isset($_POST['signupUsername'], $_POST['signupEmail'], $_POST['signupPassword'], $_POST['signupConfirmPassword'])) {
 
-if (!isset($_SERVER["REQUEST_METHOD"]) || !isset($_SERVER)) {
-    $_SERVER["REQUEST_METHOD"] = "POST";
-}
+        exit('Please complete the registration form');
+    }
 
-if (!isset($_POST["signupUsername"]) || !isset($_POST)) {
-    $_POST["signupUsername"] = "myusername";
-}
+// Checking if any values are empty
+    if (empty($_POST['signupUsername'] || $_POST['signupEmail'] || $_POST['signupPassword'] || $_POST['signupConfirmPassword'])) {
 
-if (!isset($_POST["email"]) || !isset($_POST)) {
-    $_POST["email"] = "user@example.com";
-}
+        exit('Please complete the registration form');
+    }
 
-if (!isset($_POST["signupPassword"]) || !isset($_POST)) {
-    $_POST["signupPassword"] = "mypassword";
-}
+// Checking if the username exists
+    // Preparing SQL
+    if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ?')) {
 
-if (!isset($_POST["signupConfirmPassword"]) || !isset($_POST)) {
-    $_POST["signupConfirmPassword"] = "mypassword";
-}
+        //We bind a string, so we use s for the type
+        $stmt->bind_param('s', $_POST['signupUsername']);
+        $stmt->execute();
+        $stmt->store_result();
+        // Store the result, so we can check if the account exists in the database
 
-// Processing the data when the form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($stmt->num_rows > 0) {
 
-    // Validate username
-    if(empty(trim($_POST["signupUsername"]))){
-        $usernameError = "Please enter an username";
-    } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["signupUsername"]))) {
-        $usernameError = "Username can only contain letters, numbers and underscores";
-    } else {
+            echo 'Username exists, please choose another';
 
-        $sql = "SELECT id FROM users WHERE username = ?";
+        } else {
+            if ($stmt = $mysqli->prepare('INSERT INTO users (username, password, email) VALUES (?, ?, ?)')) {
 
-        if($stmt = $mysqli->prepare($sql)){
-
-            // Bind variables as parameters
-            $stmt->bind_param("s",$paramUsername);
-
-            // Set the parameters
-            $paramUsername = trim($_POST["signupUsername"]);
-
-            // Try executing the statement
-            if($stmt->execute()){
-
-                $stmt->store_result();
-
-                if($stmt->num_rows == 1){
-                    $usernameError = "This username is already taken";
-                } else {
-                    $username = trim($_POST["signupUsername"]);
+                // Email checker
+                if (!filter_var($_POST['signupEmail'], FILTER_VALIDATE_EMAIL)) {
+                    exit('Email is not valid');
                 }
-            }else {
-                echo "Something went wrong. Try again";
-            }
-            // Close statement
-            $stmt->close();
-        }
-    }
-    // Validate email
-    if(empty(trim($_POST["email"]))){
-        $emailError = "Please enter an email";
-    } elseif (!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', trim($_POST["email"]))) {
-        $emailError = "Invalid Email";
-    } else {
 
-        $sql = "SELECT id FROM users WHERE email = ?";
-
-
-        if($stmt = $mysqli->prepare($sql)){
-
-            // Bind variables as parameters
-            $stmt->bind_param("s",$paramEmail);
-
-            // Set the parameters
-            $paramEmail = trim($_POST["email"]);
-
-            // Try executing the statement
-            if($stmt->execute()){
-
-                $stmt->store_result();
-
-                if($stmt->num_rows == 1){
-                    $emailError = "This email is already taken";
-                } else {
-                    $email = trim($_POST["email"]);
+                // Username checker
+                if (!preg_match('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}/', $_POST['signupUsername'])) {
+                    exit('Username is not valid');
                 }
-            }else {
-                echo "Something went wrong. Try again";
-            }
-            // Close statement
-            $stmt->close();
-        }
-    }
+                /* The (?!.*\.\.) and (?!.*\.$) expressions use negative lookaheads to assert that the string does not contain two consecutive dots ("..") or a dot at the end (".$").
+                This is useful for preventing the use of special directory names, such as ".." and ".", which can be used to access files outside the intended directory.
+                The [^\W] character class matches any character that is not a non-word character.
+                A non-word character is any character that is not a letter, number, or underscore. This character class is used to ensure that the string starts with a letter or number.
+                The [\w.] character class matches any letter, number, underscore, or dot. This character class is used to match the rest of the string, which can contain any combination of these characters.
+                The {0,29} expression is a quantifier that specifies that the previous character class ([\w.]) can be repeated between 0 and 29 times.
+                This means that the string can be any length between 1 and 30 characters, including the starting character matched by the [^\W] character class.*/
 
-    // Validate password
-    if(empty(trim($_POST["signupPassword"]))){
-        $passwordError = "Please enter a password";
-    } elseif(strlen(trim($_POST["signupPassword"])) < 8){
-        $passwordError = "Password must have at least 8 characters";
-    } else {
-        $password = trim($_POST["signupPassword"]);
-    }
+                // Password checker
+                if (strlen($_POST['signupPassword']) < 8) {
+                    exit('Password must be between at least 8 characters long');
+                }
 
-    // Validate confirm password
-    if(empty(trim($_POST["signupConfirmPassword"]))){
-        $confirmPasswordError = "Please confirm password";
-    } else {
-        $confirmPassword = trim($_POST["signupConfirmPassword"]);
-        if(empty($passwordError) && ($password != $confirmPassword)){
-            $confirmPasswordError = "Password did not match";
-        }
-    }
+                // ConfirmPassword checker
+                if ($_POST['signupPassword'] != $_POST['signupConfirmPassword']) {
+                    exit('Passwords are not matching');
+                }
 
-    // Check for errors before inserting
-    if(empty($usernameError) && empty($emailError) && empty($passwordError) && empty($confirmPasswordError)){
-        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+                $password = password_hash($_POST['signupPassword'], PASSWORD_DEFAULT);
+                $stmt->bind_param('sss', $_POST['signupUsername'], $password, $_POST['signupEmail']);
+                $stmt->execute();
 
-        if($stmt = $mysqli->prepare($sql)){
-
-            $stmt->bind_param("sss", $paramUsername, $paramEmail, $paramPassword);
-
-            $paramUsername = $username;
-            $paramEmail = $email;
-            $paramPassword = password_hash($password, PASSWORD_DEFAULT); //Password hash
-
-            if($stmt->execute()){
-                header("location: login.php");
             } else {
-                echo "Something went wrong. Try again";
-            }
-            // Close statement
-            $stmt->close();
-        }
-    }
-    // Close connection
-    $mysqli->close();
-}
 
+                echo 'Could not prepare statement';
+            }
+        }
+        $stmt->close();
+    }
+}
+$mysqli->close();

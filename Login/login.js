@@ -39,15 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         createAccountForm.classList.add("formHidden");
         loginForm.classList.remove("formHidden");
     });
-    
-    // Script for the login functionality
-    loginForm.addEventListener("submit", e => {
-        e.preventDefault();
-
-        //AJAX
-
-        setFormMessage(loginForm, "error", "Invalid username/password combination"); 
-    });
 
     // Script to check the input and send errors
     document.querySelectorAll(".formInput").forEach(inputElement => {

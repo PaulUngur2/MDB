@@ -15,12 +15,12 @@
                     <div class="formMessage formMessage--Error"></div>
                 <!--Username/Email-->
                     <div class="formInputGroup">
-                        <input type="text" class="formInput" id="username" name="username" autofocus placeholder="Username or Email">
+                        <input type="text" class="formInput" id="username" name="username" autofocus placeholder="Username or Email" required>
                         <div class="formInputErrorMessage"></div>
                     </div>
                 <!--Password-->
                     <div class="formInputGroup">
-                        <input type="password" class="formInput" id="password" name="password" autofocus placeholder="Password">
+                        <input type="password" class="formInput" id="password" name="password" autofocus placeholder="Password" required>
                         <div class="formInputErrorMessage"></div>
                     </div>
                 <!--Submit button-->
@@ -34,41 +34,36 @@
                     </p>
             </form>
             <!--The registration side of the page-->
-            <?php
-            include("registration.php");
-            global $username; global $email; global $password; global $confirmPassword;
-            global $usernameError; global $passwordError; global $emailError; global $confirmPasswordError;
-            ?>
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="form formHidden" id="createAccount" name="createAccount">
+            <?php include("registration.php"); ?>
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form formHidden" id="createAccount" name="createAccount">
                 <h1 class="formTitle">Create Account</h1>
                     <div class="formMessage formMessage--Error"></div>
                 <!--Username-->
                     <div class="formInputGroup">
-                        <input type="text" id="signupUsername" class="formInput" value="<?php echo $username; ?>" name="signupUsername" autofocus placeholder="Username">
-                        <div class="formInputErrorMessage"><?php echo $usernameError; ?></div>
+                        <input type="text" id="signupUsername" class="formInput" value="" name="signupUsername" autofocus placeholder="Username" required>
+                        <div class="formInputErrorMessage"></div>
                     </div>
                 <!--Email-->
                     <div class="formInputGroup">
-                        <input type="text" id="signupEmail" class="formInput" value="<?php echo $email; ?>" name="signupEmail" autofocus placeholder="Email Address">
-                        <div class="formInputErrorMessage"><?php echo $emailError; ?></div>
+                        <input type="text" id="signupEmail" class="formInput" value="" name="signupEmail" autofocus placeholder="Email Address" required>
+                        <div class="formInputErrorMessage"></div>
                     </div>
                 <!--Password-->
                     <div class="formInputGroup">
-                        <input type="password" id="signupPassword" class="formInput" value="<?php echo $password; ?>" name="signupPassword" autofocus placeholder="Password">
+                        <input type="password" id="signupPassword" class="formInput" value="" name="signupPassword" autofocus placeholder="Password" required>
                         <span id="strengthDisplay" class="badge displayBadge">Weak</span>
                      </div>
 						<div class ="passwordRequirements">
                             <li>The password is at least 8 characters long</li>
-                            <li>The password has at least one uppercase letter</li>
-                            <li>The password has at least one lowercase letter</li>
-                            <li>The password has at least one digit</li>
+                            <li>The password should have one uppercase letter</li>
+                            <li>The password should have least one lowercase letter</li>
+                            <li>The password should have one digit</li>
                             <li>The password has at least one special character</li>
-                            <?php echo $passwordError; ?>
                         </div>
                 <!--Confirm Password-->
                     <div class="formInputGroup">
-                        <input type="password" id="signupConfirmPassword" class="formInput" value="<?php echo $confirmPassword; ?>" name="signupConfirmPassword" autofocus placeholder="Confirm Password">
-                        <div class="formInputErrorMessage"><?php echo $confirmPasswordError; ?></div>
+                        <input type="password" id="signupConfirmPassword" class="formInput" value="" name="signupConfirmPassword" autofocus placeholder="Confirm Password" required>
+                        <div class="formInputErrorMessage"></div>
                     </div>
                 <!--Submit button-->
                     <button class="formButton" type="submit">Continue</button>

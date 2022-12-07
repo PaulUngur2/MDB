@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <!--The login side of the page-->
-            <form method="get" class="form" id="login" name="login" action="registration.php" >
+            <form  action="Login.php" method="post" class="form" id="login" name="login"  >
                 <h1 class="formTitle">Login</h1>
                     <div class="formMessage formMessage--Error"></div>
                 <!--Username/Email-->
@@ -34,8 +34,7 @@
                     </p>
             </form>
             <!--The registration side of the page-->
-            <?php include("registration.php"); ?>
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form formHidden" id="createAccount" name="createAccount">
+            <form action="registration.php" method="POST" class="form formHidden" id="createAccount" name="createAccount">
                 <h1 class="formTitle">Create Account</h1>
                     <div class="formMessage formMessage--Error"></div>
                 <!--Username-->

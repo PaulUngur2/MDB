@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 $password = password_hash($_POST['signupPassword'], PASSWORD_DEFAULT);
+
+                //We bind a string, so we use s for the type, and s for every variable
                 $stmt->bind_param('sss', $_POST['signupUsername'], $password, $_POST['signupEmail']);
                 $stmt->execute();
 

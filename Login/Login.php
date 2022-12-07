@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($id, $password);
             $stmt->fetch();
-            // Account exists, now we verify the password.
 
             if (password_verify($_POST['password'], $password)) {
 

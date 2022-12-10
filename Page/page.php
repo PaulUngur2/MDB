@@ -1,6 +1,6 @@
 <?php
 // Connecting to the database
-require_once __DIR__ . '/page-config.php';
+require_once ("/var/www/MDB/Login/login-config.php");
 global $mysqli;
 
 // Query and result

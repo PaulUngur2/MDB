@@ -1,7 +1,7 @@
 <?php
 
 // Connecting to the database
-require_once __DIR__ . '/login-config.php';
+require_once ("/var/www/MDB/Login/login-config.php");
 global $mysqli;
 
 // Waiting until the data was submitted
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //We bind a string, so we use s for the type, and s for every variable
                 $stmt->bind_param('sss', $_POST['signupUsername'], $password, $_POST['signupEmail']);
                 $stmt->execute();
-
+                header('Location: /Login/login-page.php');
             } else {
 
                 echo 'Could not prepare statement';

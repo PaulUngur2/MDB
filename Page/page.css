@@ -1,0 +1,65 @@
+/* Color variables and the background color*/
+body {
+    --color-primary: rgb(32, 32, 32);
+    --color-primary-light: rgb(121, 121, 121);
+    --color-secondary: rgb(230, 163, 75);
+    background-color: var(--color-primary-light);
+}
+
+.navbar.fixed-top.navbar-expand-lg.navbar-dark{
+    background-color: var(--color-primary)
+}
+
+.nav-link:hover {
+    background-color: var(--color-secondary) ;
+    color: var(--color-primary) !important;
+}
+
+
+.pt-1 {
+    padding-top:2.9rem !important;
+    margin-top: 1rem !important;
+}
+
+/* Set height of the grid*/
+.row.content {
+    height: 900px;
+    color: white;
+}
+
+/* Set background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: var(--color-primary-light);
+    height: 100%;
+}
+
+.box {
+    background-color: var(--color-primary);
+}
+
+.button{
+    background-color: var(--color-secondary) !important;
+    color: var(--color-primary) !important;
+}
+.button:active{
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    transform: scale(0.98) !important;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;}
+}

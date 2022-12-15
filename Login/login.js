@@ -47,8 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
             switch(e.target.id){
                 // Sign-up username checker*/
                 case "signupUsername":
-                    if(e.target.value.length > 0 && e.target.value.length < 6) {
-                        setInputError(inputElement, "Username must be at least 6 characters in length");
+                    const usernameFormat = new RegExp ('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}/');
+                    if(!e.target.value.match(usernameFormat)) {
+                        const dotsFormat = new RegExp('^[^\\W][\\w.]*(?<!\\.)(?<!\\.\\.)[\\w.]*[^\\W]$');
+                        const sizeFormat = new RegExp('^[a-zA-Z0-9]{6,29}$');
+                        if(!e.target.value.match(dotsFormat)){
+                            setInputError(inputElement, "Username mustn't start/end with dots or have double dots");
+                        } else if (!e.target.value.match(sizeFormat)) {
+                            setInputError(inputElement, "Username must be between 6 and 29 characters");
+                        }
                     }
                     break;
                 // Sign-up password checker
@@ -111,3 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+// jQuery code to submit the form data to the server
+$("#signup-form").submit(function(event) {
+
+    event.preventDefault(); // Prevent the default form submission
+
+    // Create an AJAX request to submit the form data to the server
+    $.ajax({
+        type: "POST",
+        url: "/Login/registration.php",
+        data: $("#createAccount").serialize(), // Serialize the form data
+        success: function(response) {
+
+            // If the response is "error-username", shows the username error
+            if (response == "error-username") {
+                $("#errorUsername").show();
+            }
+            // If the response is "error", display the error message
+            else if (response == "error-email") {
+                $("#errorEmail").show(); // Show the error message
+            }
+        }
+    });
+});
+

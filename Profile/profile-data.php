@@ -5,7 +5,7 @@ global $mysqli;
 
 // If the user isn't logged it, redirect to login page
 if(!isset($_COOKIE["login"])) {
-    header('Location: /MainMenu/main.php');
+    header('Location: /MainMenu/main-page.php');
     exit;
 }
 // Getting profile info from the database

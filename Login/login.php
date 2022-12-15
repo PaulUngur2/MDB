@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If there is a result we save the id and password
         if ($stmt->num_rows > 0) {
+
             $stmt->bind_result($id, $password);
             $stmt->fetch();
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 setcookie("login", "1", time() + 3600, "/");
                 setcookie("userid", $id, time() + 3600, "/");
-                header('Location: /Profile/profile.php');
+                header('Location: /Profile/profile-page.php');
             } else {
 
                 echo 'Incorrect username and/or password!';

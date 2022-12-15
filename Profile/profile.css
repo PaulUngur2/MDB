@@ -3,67 +3,25 @@ body {
     --color-primary: rgb(32, 32, 32);
     --color-primary-light: rgb(121, 121, 121);
     --color-secondary: rgb(230, 163, 75);
-    --color-secondary-light: white;
     background-color: var(--color-primary-light);
 }
 
-/* Menu bar general*/
-#menubar{
+.navbar.fixed-top.navbar-expand-lg.navbar-dark{
+    background-color: var(--color-primary)
+}
+
+.nav-link:hover {
+    background-color: var(--color-secondary) ;
+    color: var(--color-primary) !important;
+}
+.box {
     background-color: var(--color-primary);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
 }
 
-/* Design for the links*/
-#menubar a{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    float:left;
-    display: block;
-    color: var(--color-secondary-light);
-    text-align: center;
-    padding: 13px;
-    text-decoration: none;
-    font-size: 15px;
+.table {
+    color: white !important;
 }
 
-/* Right-aligned section*/
-.menubar-right{
-    float: right;
-}
-
-/* Changes when the mouse hovers*/
-#menubar a:hover {
-    background-color:var(--color-secondary);
-    color: black;
-}
-
-.logout{
-    float :right;
-}
-
-#data {
-    width: 1000px;
-    margin: 0 auto;
-}
-
-#data > p, .data > div {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-    margin: 25px 0;
-    padding: 25px;
-    background-color: #fff;
-}
-#data > p table td, .data > div table td {
-    padding: 5px;
-}
-#data > p table td:first-child, .data > div table td:first-child {
-    font-weight: bold;
-    color: #4a536e;
-    padding-right: 15px;
-}
-#data > div p {
-    padding: 5px;
-    margin: 0 0 10px 0;
+.space {
+    margin-top: 200px;
 }

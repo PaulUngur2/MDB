@@ -16,36 +16,23 @@ body {
 }
 .box {
     background-color: var(--color-primary);
+    color: white;
+}
+
+.boxt {
+    background-color: var(--color-primary) !important;
+    color: white;
 }
 
 .space {
     margin-top: 200px;
 }
-.btn.btn-dark.btn-block {
-    background-color: var(--color-primary);
+
+.box.container-fluid {
+    max-width: 50%;
 }
 
-.btn.btn-dark.btn-block:hover {
-    background-color: var(--color-secondary) ;
-}
-/* Formatting search box */
-.search-box{
-    position: relative;
-}
-.result{
-    position: center;
-    background-color: white;
-}
-.search-box input[type="text"], .result{
-    width: 100%;
-    box-sizing: border-box;
-}
-/* Formatting result items */
-.result p{
-    margin: 0;
-    padding: 7px 10px;
-    cursor: pointer;
-}
-.result p:hover{
-    background: var(--color-secondary);
+.img {
+    height: 175px;
+    width: 125px;
 }

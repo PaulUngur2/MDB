@@ -4,4 +4,4 @@ setcookie("userid", "", time() - 3600, '/');
 setcookie("login", "", time() - 3600, '/');
 
 // Redirect the user to the login page
-header('Location: /MainMenu/main.php');
+header('Location: /MainMenu/main-page.php');

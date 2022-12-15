@@ -21,18 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Checking if the username exists
     // Preparing SQL
-    if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ?')) {
+    if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ? AND email = ?')) {
 
         //We bind a string, so we use s for the type
-        $stmt->bind_param('s', $_POST['signupUsername']);
+        $stmt->bind_param('ss', $_POST['signupUsername'], $_POST['signupEmail']);
         $stmt->execute();
         $stmt->store_result();
         // Store the result, so we can check if the account exists in the database
 
         if ($stmt->num_rows > 0) {
 
-            echo 'Username exists, please choose another';
+            if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ?')) {
 
+                //We bind a string, so we use s for the type
+                $stmt->bind_param('s', $_POST['signupUsername']);
+                $stmt->execute();
+                $stmt->store_result();
+                // Store the result, so we can check if the account exists in the database
+
+                if ($stmt->num_rows > 0) {
+                    exit('error-username');
+                } else {
+                    exit('error-email');
+                }
+            }
         } else {
             if ($stmt = $mysqli->prepare('INSERT INTO users (username, password, email) VALUES (?, ?, ?)')) {
 
@@ -42,16 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 // Username checker
-                if (!preg_match('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}/', $_POST['signupUsername'])) {
+                if (!preg_match('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{6,29}/', $_POST['signupUsername'])) {
                     exit('Username is not valid');
                 }
-                /* The (?!.*\.\.) and (?!.*\.$) expressions use negative lookaheads to assert that the string does not contain two consecutive dots ("..") or a dot at the end (".$").
-                This is useful for preventing the use of special directory names, such as ".." and ".", which can be used to access files outside the intended directory.
-                The [^\W] character class matches any character that is not a non-word character.
-                A non-word character is any character that is not a letter, number, or underscore. This character class is used to ensure that the string starts with a letter or number.
-                The [\w.] character class matches any letter, number, underscore, or dot. This character class is used to match the rest of the string, which can contain any combination of these characters.
-                The {0,29} expression is a quantifier that specifies that the previous character class ([\w.]) can be repeated between 0 and 29 times.
-                This means that the string can be any length between 1 and 30 characters, including the starting character matched by the [^\W] character class.*/
+                /* A valid username that is between 6 and 29 characters long, and Can contain letters, numbers, underscores,
+                and dots, as long as it does not start or end with a dot and does not contain .. anywhere.*/
 
                 // Password checker
                 if (strlen($_POST['signupPassword']) < 8) {

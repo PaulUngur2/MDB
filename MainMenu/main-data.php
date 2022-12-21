@@ -1,4 +1,5 @@
 <?php
+
 // Connecting to the database
 require_once("/var/www/MDB/Login/login-config.php");
 global $mysqli;

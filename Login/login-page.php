@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Login/Sign Up Form</title>
+        <link rel="icon" href="../images/site-favicon.ico">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -13,7 +14,8 @@
 
     </head>
     <body>
-        <div class="container container-fluid">
+        <div class="container container-fluid p-4 m-3 shadow">
+            <img src="../images/site-icon.png" alt="icon" class="img-fluid logo">
             <!--The login side of the page-->
             <form action="login.php" method="post" class="form" id="login" name="login"  >
                 <h1 class="formTitle text-center m-3 p-2">Login</h1>
@@ -55,9 +57,9 @@
                 <!--Password-->
                     <div class="formInputGroup mb-2">
                         <input type="password" id="signupPassword" class="formInput" value="" name="signupPassword" autofocus placeholder="Password" required>
-                        <span id="strengthDisplay" class="badge displayBadge">Weak</span>
+                        <span id="strengthDisplay" class="badge displayBadge text-center mt-3">Weak</span>
                      </div>
-						<div class ="passwordRequirements">
+						<div class ="passwordRequirements text-white mb-2">
                             <ul>
                             <li>The password is at least 8 characters long</li>
                             <li>The password should have one uppercase letter</li>

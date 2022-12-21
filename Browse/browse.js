@@ -3,7 +3,6 @@ $(document).ready(function () {
     $("#liveSearch").keyup(function () {
         var input = $(this).val();
 
-
         if (input != ""){
 
             $.ajax({
@@ -21,3 +20,4 @@ $(document).ready(function () {
         }
     });
 });
+

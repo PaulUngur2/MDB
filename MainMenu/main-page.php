@@ -3,6 +3,7 @@
 
 <head>
     <title>MDB</title>
+    <link rel="icon" href="../images/site-favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -15,24 +16,24 @@
 
 <body>
 <!--This is for the menu, you can use it to login/sign up or browse the database-->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="../MainMenu/main-page.php"> <img src="../images/site-icon.png" alt="logo" class="icon"></a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/MainMenu/main-page.php">Home</a>
+                    <a class="nav-link" href="../MainMenu/main-page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Browse/browse-page.php">Browse</a>
+                    <a class="nav-link" href="../Browse/browse-page.php">Browse</a>
                 </li>
 
                 <?php if(isset($_COOKIE["login"])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manga List</a>
+                        <a class="nav-link" href="../List/list-page.php">Manga List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Profile/profile-page.php">Profile</a>
@@ -57,12 +58,15 @@
 
 <!--Title which attracts the attention of the user and the search bar-->
 <div class="space">
+    <div class="container-fluid col-sm-4 text-center">
+        <img src="../images/main-page-logo.png" alt="logo" class="logo img-fluid col-sm-6 mb-2">
+    </div>
     <div class="box container-fluid col-sm-4 text-center rounded p-3">
         <form action="../MainMenu/main-search.php" method="post" id="mSearch" name="mSearch">
             <div class="search-box container-fluid mx-auto">
                 <input type="text" class="form-control" autocomplete="off" placeholder="Search title..." id="page" name="page" required/>
-                <div class="result"></div>
-                <button type="submit" class="btn btn-dark btn-block"><i class="bi bi-search"></i> Search</button>
+                <div class="result"></div> <br>
+                <button type="submit" class="btn btn-light btn-block border-0"><i class="bi bi-search"></i> Search</button>
             </div>
         </form>
     </div>

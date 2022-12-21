@@ -1,27 +1,33 @@
 /* Color variables and the background color*/
 body {
-    --color-primary: rgb(32, 32, 32);
-    --color-primary-light: rgb(121, 121, 121);
-    --color-secondary: rgb(230, 163, 75);
-    background-color: var(--color-primary-light);
+    --color-primary: white;
+    --color-text: rgb(121, 121, 121);
+    --color-secondary: black;
+    background-image: url("/images/background.png");
 }
 
-.navbar.fixed-top.navbar-expand-lg.navbar-dark{
-    background-color: var(--color-primary)
+.navbar.fixed-top.navbar-expand-lg.navbar-light{
+    background-color: var(--color-primary);
+    opacity: 90%;
 }
 
 .nav-link:hover {
-    background-color: var(--color-secondary) ;
+    background-color: var(--color-secondary);
     color: var(--color-primary) !important;
 }
 .box {
-    background-color: var(--color-primary);
-}
-
-.table {
-    color: white !important;
+    background-color: var(--color-secondary);
 }
 
 .space {
     margin-top: 200px;
+}
+
+.icon {
+    height: 30px;
+    width: 50px;
+}
+
+.texth4 {
+    background-color: var(--color-secondary);
 }

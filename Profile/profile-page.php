@@ -5,7 +5,8 @@ global $password, $email, $username;
 <html lang="en">
 
 <head>
-    <title><?php echo $username?>'s Profile </title>
+    <title><?= $_COOKIE["login"]?>'s Profile </title>
+    <link rel="icon" href="../images/site-favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -16,27 +17,27 @@ global $password, $email, $username;
 </head>
 
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="../MainMenu/main-page.php"> <img src="../images/site-icon.png" alt="logo" class="icon"></a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/MainMenu/main-page.php">Home</a>
+                    <a class="nav-link" href="../MainMenu/main-page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Browse/browse-page.php">Browse</a>
+                    <a class="nav-link" href="../Browse/browse-page.php">Browse</a>
                 </li>
 
                 <?php if(isset($_COOKIE["login"])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manga List</a>
+                        <a class="nav-link" href="../List/list-page.php">Manga List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile-page.php">Profile</a>
+                        <a class="nav-link" href="../Profile/profile-page.php">Profile</a>
                     </li>
                 <?php } ?>
             </ul>
@@ -57,29 +58,29 @@ global $password, $email, $username;
 </nav>
 
 <div class="space">
-    <h4 class="container-fluid col-sm-6 pb-2 text-white">Your account details are below:</h4>
-<div class="box container-fluid table-responsive col-sm-6" >
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Username:</th>
-                <td><?php echo $username;?></td>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th>Email:</th>
-                <td><?php echo $email;?></td>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th>Password:</th>
-                <td><?php echo $password;?></td>
-            </tr>
-        </thead>
-    </table>
-</div>
+    <h4 class="texth4 container-fluid col-sm-6 p-3 text-white">Your account details are below:</h4>
+    <div class="box container-fluid table-responsive col-sm-6" >
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>Username:</th>
+                    <td><?php echo $username;?></td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>Email:</th>
+                    <td><?php echo $email;?></td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>Password:</th>
+                    <td><?php echo $password;?></td>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 </body>
 </html>

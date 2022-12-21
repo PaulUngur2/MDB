@@ -1,13 +1,14 @@
 /* Color variables and the background color*/
 body {
-    --color-primary: rgb(32, 32, 32);
-    --color-primary-light: rgb(121, 121, 121);
-    --color-secondary: rgb(230, 163, 75);
-    background-color: var(--color-primary-light);
+    --color-primary: white;
+    --color-text: rgb(121, 121, 121);
+    --color-secondary: black;
+    background-image: url("/images/background-main.png");
 }
 
-.navbar.fixed-top.navbar-expand-lg.navbar-dark{
-    background-color: var(--color-primary)
+.navbar.fixed-top.navbar-expand-lg.navbar-light{
+    background-color: var(--color-primary);
+    opacity: 95%;
 }
 
 .nav-link:hover {
@@ -15,18 +16,21 @@ body {
     color: var(--color-primary) !important;
 }
 .box {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
 }
 
 .space {
-    margin-top: 200px;
+    margin-top: 100px;
 }
-.btn.btn-dark.btn-block {
+.btn.btn-light.btn-block {
     background-color: var(--color-primary);
+    color: var(--color-text);
+    border: none;
 }
 
-.btn.btn-dark.btn-block:hover {
-    background-color: var(--color-secondary) ;
+.btn.btn-light.btn-block:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
 }
 /* Formatting search box */
 .search-box{
@@ -34,7 +38,8 @@ body {
 }
 .result{
     position: center;
-    background-color: white;
+    background-color: var(--color-primary);
+    color: var(--color-text);
 }
 .search-box input[type="text"], .result{
     width: 100%;
@@ -48,4 +53,15 @@ body {
 }
 .result p:hover{
     background: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+.icon{
+    height: 30px;
+    width: 50px;
+}
+
+.logo {
+    height: 400px;
+    width: 600px;
 }

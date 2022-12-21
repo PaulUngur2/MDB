@@ -15,21 +15,14 @@ body {
     background-color: var(--color-secondary);
     color: var(--color-primary) !important;
 }
-.box {
-    background-color: var(--color-secondary);
-}
 
-.boxTable {
+.box {
     background-color: var(--color-secondary) !important;
     color: var(--color-primary);
 }
 
 .space {
     margin-top: 200px;
-}
-
-.box.container-fluid {
-    max-width: 50%;
 }
 
 .img {
@@ -49,4 +42,7 @@ body {
 .icon{
     height: 30px;
     width: 50px;
+}
+.texth4 {
+    background-color: var(--color-secondary);
 }

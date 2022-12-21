@@ -1,4 +1,5 @@
 <?php
+
 // Connecting to the database
 require_once("/var/www/MDB/Login/login-config.php");
 global $mysqli;
@@ -18,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_result($id);
             $stmt->fetch();
 
-            setcookie("mangaid", $id, time() + 3600, "/");
-            header('Location: /Page/page.php');
+            header("Location: http://localhost/Page/page.php?id=$id");
         } else {
+
+            $title = $_POST['page'];
+            setcookie("title", $title, time() + 3600, "/");
             header('Location: /Browse/browse-page.php');
         }
         $stmt->close();

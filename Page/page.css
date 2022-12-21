@@ -1,20 +1,20 @@
 /* Color variables and the background color*/
 body {
-    --color-primary: rgb(32, 32, 32);
-    --color-primary-light: rgb(121, 121, 121);
-    --color-secondary: rgb(230, 163, 75);
-    background-color: var(--color-primary-light);
+    --color-primary: white;
+    --color-text: rgb(121, 121, 121);
+    --color-secondary: black;
+    background-image: url("/images/background.png");
 }
 
-.navbar.fixed-top.navbar-expand-lg.navbar-dark{
-    background-color: var(--color-primary)
+.navbar.fixed-top.navbar-expand-lg.navbar-light{
+    background-color: var(--color-primary);
+    opacity: 90%;
 }
 
 .nav-link:hover {
-    background-color: var(--color-secondary) ;
+    background-color: var(--color-secondary);
     color: var(--color-primary) !important;
 }
-
 
 .pt-1 {
     padding-top:2.9rem !important;
@@ -24,18 +24,17 @@ body {
 /* Set height of the grid*/
 .row.content {
     height: 900px;
-    color: white;
+    color: var(--color-primary);
 }
 
 /* Set background color and 100% height */
 .sidenav {
     padding-top: 20px;
-    background-color: var(--color-primary-light);
     height: 100%;
 }
 
 .box {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
 }
 
 .button{
@@ -53,6 +52,15 @@ footer {
     background-color: var(--color-secondary);
     color: white;
     padding: 15px;
+}
+
+.submitted{
+    display: none;
+}
+
+.icon{
+    height: 30px;
+    width: 50px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

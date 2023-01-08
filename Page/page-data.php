@@ -7,7 +7,7 @@ global $mysqli;
 // Check if rating and id have been received via POST request
 if (isset($_POST['rating'],$_POST['id'])){
     // Update rating for user with given id in the 'userslist' table
-    $stmt = $mysqli->prepare('UPDATE userslist SET rating = ? WHERE users = ? AND titles = ?');
+    $stmt = $mysqli->prepare('UPDATE userslist SET urating = ? WHERE users = ? AND titles = ?');
     // Bind the rating, userid and mangaId values as parameters to the statement
     $stmt->bind_param('iii', $_POST['rating'], $_COOKIE['userid'], $_POST['id']);
     // Execute the statement
@@ -26,7 +26,7 @@ if (isset($_POST['rating'],$_POST['id'])){
     $stmt->fetch();
 
     // Get rating for series from 'userslist' table for current user
-    $stmt->prepare('SELECT rating FROM userslist WHERE users = ? AND titles = ?');
+    $stmt->prepare('SELECT urating FROM userslist WHERE users = ? AND titles = ?');
     // Bind the userid and mangaId values as parameters to the statement
     $stmt->bind_param('ii', $_COOKIE['userid'], $_GET['id']);
     // Execute the statement

@@ -119,10 +119,10 @@ if(!isset($_GET['id'])) {
                         <h5>Rating: <?= $rating ?>/5</h5>
                         <!-- Display rating select if the user has added the manga to their list and if you are logged in-->
                         <?php if(isset($_COOKIE["login"])) { ?>
-                            <?php if ($added == "Added"){
+                            <?php if ($added == "Added") {
                                 // Show the rating select
                                 echo '<style> .yourRating {display: block;} </style>';
-                                ?>
+                            } ?>
                                 <div class="form-inline yourRating">
                                     <div class="form-group">
                                         <!-- Display rating options -->
@@ -138,8 +138,7 @@ if(!isset($_GET['id'])) {
                                             </select>
                                         </div>
                                     </div>
-                            <?php }
-                        } ?>
+                            <?php } ?>
                     </div>
                 </div>
                 <!-- Container for the manga's title and genre information, as well as the manga's description -->

@@ -41,7 +41,7 @@ $(document).ready(function () {
     $('textarea').keyup(function () {
 
         // This counts the number of characters in the textarea
-        var characterCount = $(this).val().length,
+        const characterCount = $(this).val().length,
             // These variables store the elements with the corresponding ids
             current = $('#current'),
             maximum = $('#maximum'),

@@ -15,7 +15,7 @@ $user = $_COOKIE['userid'];
 
 // Prepare a SELECT statement to join the Mangadb and userslist tables and select rows where the users column in the userslist
 // table matches the user's id and the titles column in the userslist table matches the id column in the Mangadb table
-$stmt = $mysqli->prepare("SELECT a.name, a.status, a.img, b.rating, b.titles FROM Mangadb a INNER JOIN userslist b on a.id = b.titles WHERE b.users = '{$user}' and b.titles = a.id;");
+$stmt = $mysqli->prepare("SELECT a.name, a.status, a.img, b.urating, b.titles FROM Mangadb a INNER JOIN userslist b on a.id = b.titles WHERE b.users = '{$user}' and b.titles = a.id;");
 
 // Execute the statement
 $stmt->execute();

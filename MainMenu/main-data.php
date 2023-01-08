@@ -1,9 +1,10 @@
 <?php
 
-// Connecting to the database
+// Connect to the database
 require_once("/var/www/MDB/Login/login-config.php");
 global $mysqli;
 
+// Check if a search term has been submitted
 if(isset($_REQUEST["term"])){
 
     // Prepare a select statement

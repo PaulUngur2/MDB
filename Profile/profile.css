@@ -1,33 +1,56 @@
-/* Color variables and the background color*/
 body {
     --color-primary: white;
     --color-text: rgb(121, 121, 121);
     --color-secondary: black;
     background-image: url("/images/background.png");
+    /*This sets the body element to have a background image
+       It also defines variables for the primary color (white), text color (light grey), and secondary color (black)*/
 }
 
 .navbar.fixed-top.navbar-expand-lg.navbar-light{
     background-color: var(--color-primary);
     opacity: 90%;
+    /* This sets the background color of the navbar to the primary color, and sets its opacity to 90% */
 }
 
 .nav-link:hover {
     background-color: var(--color-secondary);
     color: var(--color-primary) !important;
+    /* This changes the background color and text color of the nav-link element when the mouse hovers over it.
+    The text color is set to the primary color, and the !important rule overwrites any other styles for this element */
 }
+
 .box {
     background-color: var(--color-secondary);
+    /* This sets the background color of the element with the class "box" to the secondary color */
 }
 
 .space {
-    margin-top: 200px;
+    margin-top: 12.5rem;
+    /* This adds a top margin of 12.5rem to the element with the class "space" */
 }
 
 .icon {
-    height: 30px;
-    width: 50px;
+    height: 1.875rem;
+    width: 3.125rem;
+    /* This sets the height and width of the element with the class "icon" */
 }
 
 .texth4 {
     background-color: var(--color-secondary);
+    /* Set the background color of an element with the class '.texth4' to the value of the secondary color */
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+    /* This styles the link element, setting its color to the primary color, removing the text decoration, and setting the cursor to a pointer */
+}
+
+
+.link:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+    /* This changes the text decoration and color of the link element when the mouse hovers over it*/
 }

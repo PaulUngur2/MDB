@@ -1,0 +1,31 @@
+body {
+    --color-primary: white;
+    --color-text: rgb(121, 121, 121);
+    --color-secondary: black;
+    --color-error: rgb(189, 0, 0);
+    --color-success: green;
+    --border-radius: 4px;
+
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/images/background-main.png");
+    /*This sets the body element to have a background image, and sets up the layout of the page with flexbox
+        It also defines variables for the primary color (white), text color (light grey), and secondary color (black)*/
+}
+
+.container {
+    width: 25rem;
+    max-width: 25rem;
+    border-radius: var(--border-radius);
+    background: var(--color-secondary);
+    /* This sets the width and maximum width of the element with the class "container" to 25rem, and sets the border radius
+       It also sets the background color to the secondary color*/
+}
+.logo {
+    height: 1.875rem;
+    width: 3.125rem;
+    /* This sets the height and width of the element with the class "logo" */
+}

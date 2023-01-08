@@ -1,87 +1,93 @@
 <?php
 
-// Connecting to the database
+// Connect to the database
 require_once ("/var/www/MDB/Login/login-config.php");
 global $mysqli;
 
-// Waiting until the data was submitted
+// Wait until the data is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the username already exists
+    // Prepare SQL statement
+    if ($stmt = $mysqli->prepare('SELECT * FROM users WHERE username = ?')) {
 
-// Checking if the data is submitted
-    if (!isset($_POST['signupUsername'], $_POST['signupEmail'], $_POST['signupPassword'], $_POST['signupConfirmPassword'])) {
-
-        exit('Please complete the registration form');
-    }
-
-// Checking if any values are empty
-    if (empty($_POST['signupUsername'] || $_POST['signupEmail'] || $_POST['signupPassword'] || $_POST['signupConfirmPassword'])) {
-
-        exit('Please complete the registration form');
-    }
-
-// Checking if the username exists
-    // Preparing SQL
-    if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ? AND email = ?')) {
-
-        //We bind a string, so we use s for the type
-        $stmt->bind_param('ss', $_POST['signupUsername'], $_POST['signupEmail']);
+        // Bind string to the statement (using 's' for the type)
+        $stmt->bind_param('s', $_POST['signupUsername']);
         $stmt->execute();
         $stmt->store_result();
-        // Store the result, so we can check if the account exists in the database
+        // Store result to check if the account exists in the database
 
         if ($stmt->num_rows > 0) {
+            // If the username already exists, display an error message
+            echo 'Username already exists';
+        } else if ($stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?')) {
+            // Check if the email already exists
+            $email = $_POST['signupEmail'];
 
-            if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ?')) {
+            // Bind the email to the statement
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $stmt->store_result();
 
-                //We bind a string, so we use s for the type
-                $stmt->bind_param('s', $_POST['signupUsername']);
-                $stmt->execute();
-                $stmt->store_result();
-                // Store the result, so we can check if the account exists in the database
-
-                if ($stmt->num_rows > 0) {
-                    exit('error-username');
-                } else {
-                    exit('error-email');
-                }
-            }
-        } else {
-            if ($stmt = $mysqli->prepare('INSERT INTO users (username, password, email) VALUES (?, ?, ?)')) {
-
-                // Email checker
-                if (!filter_var($_POST['signupEmail'], FILTER_VALIDATE_EMAIL)) {
-                    exit('Email is not valid');
-                }
-
-                // Username checker
-                if (!preg_match('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{6,29}/', $_POST['signupUsername'])) {
-                    exit('Username is not valid');
-                }
-                /* A valid username that is between 6 and 29 characters long, and Can contain letters, numbers, underscores,
-                and dots, as long as it does not start or end with a dot and does not contain .. anywhere.*/
-
-                // Password checker
-                if (strlen($_POST['signupPassword']) < 8) {
-                    exit('Password must be between at least 8 characters long');
-                }
-
-                // ConfirmPassword checker
-                if ($_POST['signupPassword'] != $_POST['signupConfirmPassword']) {
-                    exit('Passwords are not matching');
-                }
-
-                $password = password_hash($_POST['signupPassword'], PASSWORD_DEFAULT);
-
-                //We bind a string, so we use s for the type, and s for every variable
-                $stmt->bind_param('sss', $_POST['signupUsername'], $password, $_POST['signupEmail']);
-                $stmt->execute();
-                header('Location: /Login/login-page.php');
+            if ($stmt->num_rows > 0) {
+                // If the email already exists, display an error message
+                echo 'Email already exists';
             } else {
+                // If the email and username are unique, insert the new user into the database
+                if ($stmt = $mysqli->prepare('INSERT INTO users (username, password, email, activation) VALUES (?, ?, ?, ?)')) {
+                    // Validate the email
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        echo 'Email is not valid';
+                    }
 
-                echo 'Could not prepare statement';
+                    // Validate the username
+                    if (!preg_match('/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{6,29}/', $_POST['signupUsername'])) {
+                        echo 'Username is not valid';
+                    }
+                    /* A valid username must be between 6 and 29 characters long and can contain letters, numbers, underscores,
+                    and dots, as long as it does not start or end with a dot and does not contain ".." anywhere.*/
+
+                    // Validate the password
+                    if (strlen($_POST['signupPassword']) < 8) {
+                        echo 'Password must be at least 8 characters long';
+                    }
+
+                    // Validate the confirm password
+                    if ($_POST['signupPassword'] != $_POST['signupConfirmPassword']) {
+                        echo 'Passwords are not matching';
+                    }
+
+                    // Hash the password for security
+                    $password = password_hash($_POST['signupPassword'], PASSWORD_DEFAULT);
+
+                    // Generate an activation token
+                    $activation = uniqid(md5(time()));
+
+                    // Bind the variables to the statement (using 's' for each variable)
+                    $stmt->bind_param('ssss', $_POST['signupUsername'], $password, $email, $activation);
+                    $stmt->execute();
+
+                    // Set up email variables
+                    $to = $email;
+                    // Set up variables for email message
+                    $subject = "Account Activation";
+                    $message = "Hello, <br> Here is the <a href='http://localhost/Profile/activate.php?token=$activation&email=$email'>link</a> to activate your account.<br><br>Best regards MangaDB staff team.";
+                    $headers = "From: mangadatab@gmail.com" . "\r\n" . "MIME-Version: 1.0" . "\r\n" . "Content-type: text/html; charset=utf-8";
+
+                    // Send email to user with activation link
+                    if (mail($to, $subject, $message, $headers)) {
+                        echo 'Your account has been successfully created and a link has been sent to your mail to activate your account. <a href="../Login/login-page.php" class="formLink">Go to the login page.</a>';
+                    } else {
+                        echo "Failed to send to your mail";
+                    }
+
+                    // If prepare statement fails
+                } else {
+                    echo 'Could not prepare statement';
+                }
+
+                // Close connection
+                $mysqli->close();
             }
         }
-        $stmt->close();
     }
 }
-$mysqli->close();

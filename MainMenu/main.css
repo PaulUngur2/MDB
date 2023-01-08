@@ -1,67 +1,83 @@
-/* Color variables and the background color*/
 body {
     --color-primary: white;
     --color-text: rgb(121, 121, 121);
     --color-secondary: black;
     background-image: url("/images/background-main.png");
+    /*This sets the body element to have a background image
+      It also defines variables for the primary color (white), text color (light grey), and secondary color (black)*/
 }
 
 .navbar.fixed-top.navbar-expand-lg.navbar-light{
     background-color: var(--color-primary);
     opacity: 95%;
+    /* This sets the background color of the navbar to the primary color, and sets its opacity to 95% */
 }
 
 .nav-link:hover {
     background-color: var(--color-secondary) ;
     color: var(--color-primary) !important;
+    /* This changes the background color and text color of the nav-link element when the mouse hovers over it.
+        The text color is set to the primary color, and the !important rule overwrites any other styles for this element */
 }
 .box {
     background-color: var(--color-secondary);
+    /* This sets the background color of the element with the class "box" to the secondary color */
 }
 
 .space {
-    margin-top: 100px;
+    margin-top: 6.25rem;
+/* This adds a top margin of 6.25rem to the element with the class "space" */
 }
+
 .btn.btn-light.btn-block {
     background-color: var(--color-primary);
     color: var(--color-text);
     border: none;
+    /* This sets the background color of the button element to the primary color, and the text color to the text color variable while removing the border */
 }
 
 .btn.btn-light.btn-block:hover {
     background-color: var(--color-secondary);
     color: var(--color-primary);
+    /* This changes the background color and text color of the button element when the mouse hovers over it */
 }
-/* Formatting search box */
+
 .search-box{
     position: relative;
+    /* Formatting search box */
 }
 .result{
     position: center;
     background-color: var(--color-primary);
     color: var(--color-text);
+    /* Formatting search results and changing the background color to the primary variable and the color to the text color variable*/
 }
 .search-box input[type="text"], .result{
     width: 100%;
     box-sizing: border-box;
+    /* Formatting search box and search results */
 }
-/* Formatting result items */
+
 .result p{
     margin: 0;
-    padding: 7px 10px;
+    padding: 0.4375rem 0.625rem;
     cursor: pointer;
+    /* Formatting result items, getting a pointer on the mouse while clicking it */
 }
 .result p:hover{
     background: var(--color-secondary);
     color: var(--color-primary);
+    /* Formatting result items when the mouse hovers over it */
 }
 
-.icon{
-    height: 30px;
-    width: 50px;
+.icon {
+    height: 1.875rem;
+    width: 3.125rem;
+    /* This sets the height and width of the element with the class "icon" */
 }
 
 .logo {
-    height: 400px;
-    width: 600px;
+    height: 25rem;
+    width: 37.5rem;
+    /* This sets the height and width of the element with the class "logo" */
 }

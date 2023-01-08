@@ -1,4 +1,3 @@
-/* Color variables and other instances*/
 body {
     --color-primary: white;
     --color-text: rgb(121, 121, 121);
@@ -13,27 +12,31 @@ body {
     align-items: center;
     justify-content: center;
     background-image: url("/images/background-main.png");
+    /*This sets the body element to have a background image, and sets up the layout of the page with flexbox
+    It also defines variables for the primary color (white), text color (light grey), and secondary color (black)*/
 }
 
-/* Container for the Login/Sign-up*/
 .container {
-    width: 400px;
-    max-width: 400px;
+    width: 25rem;
+    max-width: 25rem;
     border-radius: var(--border-radius);
     background: var(--color-secondary);
+    /* This sets the width and maximum width of the element with the class "container" to 25rem, and sets the border radius
+    It also sets the background color to the secondary color*/
 }
 
-/* The switch for username/email error */
 .errorUsername {
     display: none;
+    /* This hides the error message for the username input */
 }
 .errorEmail {
     display: none;
+    /* This hides the error message for the email input */
 }
 
-/* The switch for changing between Login and Sign-up*/
 .formHidden {
     display: none;
+    /* The switch for changing between Login and Sign-up*/
 }
 
 /* Removes margins on the top and bottom of the container*/
@@ -44,9 +47,9 @@ body {
     margin-bottom: 0;
 }
 
-/* Title design*/
 .formTitle {
     color: var(--color-primary);
+    /* Title design which gets the primary color*/
 }
 
 /* Messages design*/
@@ -57,7 +60,6 @@ body {
     color: var(--color-error);
 }
 
-/* Input design*/
 .formInput{
     display: block;
     width: 100%;
@@ -68,27 +70,39 @@ body {
     outline: none;
     background: var(--color-primary);
     transition: background 0.2s, border-color 0.2s;
+
+    /*The input will have a display value of block, a width of 100% of its parent element,padding of 0.75rem on all sides,
+    a box sizing of border-box, a border radius specified by the border-radius variable, a border with a width of 1 pixel,
+    a solid style, and a color specified by the color-secondary variable. The input will also have no outline, a background color specified by the color-primary variable,
+     and a transition effect for the background and border-color properties with a duration of 0.2 seconds. */
 }
 
-/* Border color changes when it's focused on*/
 .formInput:focus{
     border-color: var(--color-secondary);
+    /* Border color changes when it's focused on*/
 }
 
-/* Border color changes when it receives an error*/
 .formInputError{
     color:var(--color-error);
     border-color: var(--color-error);
+    /* Border color changes when it receives an error*/
 }
 
-/* Design for Error message*/
 .formInputErrorMessage{
     margin-top: 0.5rem;
     font-size: 0.85rem;
     color: var(--color-error);
+    /* Design for Error message*/
 }
 
-/* Button design*/
+
+.formSuccessMessage{
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-success);
+    /* Design for Success message*/
+}
+
 .formButton{
     width: 100%;
     padding: 1rem 2rem;
@@ -100,44 +114,50 @@ body {
     outline: none;
     cursor: pointer;
     background: var(--color-primary);
+    /*The button will have a width of 100% of its parent element, padding of 1rem on
+     the top and bottom and 2rem on the left and right, a bold font weight, a font size of 1.1rem, a color specified by the color-text variable,
+     no border, a border radius specified by the border-radius variable, no outline, a cursor style of pointer, and a background color specified by the color-primary variable. */
 }
 
-/* Changes of the button when it's hovered on*/
 .formButton:hover {
     background: var(--color-primary);
     color: var(--color-secondary);
+    /* Button design when it's hovered*/
 }
 
-/* Changes of the button when it's active*/
 .formButton:active {
     transform: scale(0.98);
+    /* Changes of the button when it's active*/
 }
 
-/* Design for the bottom links*/
 .formLink {
     color: var(--color-primary);
     text-decoration: none;
     cursor: pointer;
+    /* This styles the link element, setting its color to the primary color, removing the text decoration, and setting the cursor to a pointer */
 }
 
-/* Changes of the links when they are hovered*/
 .formLink:hover {
     text-decoration: underline;
     color: var(--color-primary);
+    /* This changes the text decoration and color of the link element when the mouse hovers over it*/
 }
 
-/* Password strength bar*/
 .displayBadge{
     display: none;
+    /* Password strength bar switch*/
 }
 
-/* Password requirements design*/
 .passwordRequirements{
 	font-size: 0.75rem;
+    /* Setting size for the password requirements*/
+
 }
+
 .logo {
-    height: 30px;
-    width: 50px;
+    height: 1.875rem;
+    width: 3.125rem;
+    /* This sets the height and width of the element with the class "logo" */
 }
 
 

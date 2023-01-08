@@ -1,0 +1,102 @@
+body {
+    --color-primary: white;
+    --color-text: rgb(121, 121, 121);
+    --color-secondary: black;
+    background-image: url("/images/background.png");
+
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*This sets the body element to have a background image, and sets up the layout of the page with flexbox
+    It also defines variables for the primary color (white), text color (light grey), and secondary color (black)*/
+}
+
+.space {
+    margin-top: 20rem!important;
+    /* This adds a top margin of 20rem to the element with the class "space", and the !important rule overwrites any other styles for this element */
+}
+
+.navbar.fixed-top.navbar-expand-lg.navbar-light{
+    background-color: var(--color-primary);
+    opacity: 90%;
+    /* This sets the background color of the navbar to the primary color, and sets its opacity to 90% */
+}
+
+.nav-link:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary) !important;
+    /* This changes the background color and text color of the nav-link element when the mouse hovers over it.
+    The text color is set to the primary color, and the !important rule overwrites any other styles for this element */
+}
+
+.box {
+    background-color: var(--color-secondary);
+    /* This sets the background color of the element with the class "box" to the secondary color */
+}
+
+.button{
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-primary);
+    /* This styles the button element, setting its width to 100%, adding padding, bolding the font, setting the font size, text color, border, border radius, and background color.
+    It also removes the outline when the button is clicked, and sets the cursor to a pointer */
+}
+
+.button:active{
+    background-color: var(--color-secondary) !important;
+    color: var(--color-primary) !important;
+    transform: scale(0.98) !important;
+    /* This changes the background color and text color of the button element when it is being clicked, and scales it down slightly. The !important rule overwrites any other styles for this element */
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+    /* This styles the link element, setting its color to the primary color, removing the text decoration, and setting the cursor to a pointer */
+}
+
+
+.link:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+    /* This changes the text decoration and color of the link element when the mouse hovers over it*/
+}
+
+
+.icon {
+    height: 1.875rem;
+    width: 3.125rem;
+    /* This sets the height and width of the element with the class "icon" */
+}
+
+
+.container {
+    width: 50rem;
+    max-width: 50rem;
+    border-radius: var(--border-radius);
+    background: var(--color-secondary);
+    /* This sets the width and maximum width of the element with the class "container" to 50rem, and sets the border radius
+    It also sets the background color to the secondary color*/
+}
+
+
+.formDescription{
+    resize: none;
+    /* This prevents the element with the class "formDescription" from being resized */
+}
+
+#count {
+    padding: 0.1rem 0 0 0;
+    font-size: 0.875rem;
+    /* This adds padding and sets the font size for the element with the id "count" */
+}

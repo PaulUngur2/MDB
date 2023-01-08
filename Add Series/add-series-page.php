@@ -1,8 +1,18 @@
+<?php
+// Check if user is logged in
+if(!isset($_COOKIE["login"])) {
+    // Redirect to main page if not logged in
+    header('Location: /MainMenu/main-page.php');
+    exit;
+}
+include ('add-series-data.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Page title -->
-        <title>Browse</title>
+        <title>Add Series</title>
         <!-- Favicon -->
         <link rel="icon" href="../images/site-favicon.ico">
         <!-- Character encoding -->
@@ -14,17 +24,14 @@
         <!-- Bootstrap icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
         <!-- Page-specific CSS -->
-        <link rel="stylesheet" href="browse.css" type="text/css"/>
+        <link rel="stylesheet" href="add-series.css">
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Include the lazysizes library to delay loading of images -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js"></script>
         <!-- Include a custom JavaScript file -->
-        <script src="browse.js" type="text/javascript"></script>
+        <script src="add-series.js" type="text/javascript"></script>
     </head>
-
     <body>
         <!-- Navigation bar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light">
@@ -81,20 +88,73 @@
             </div>
         </nav>
         <!-- Main content -->
-        <?php
-        // Get the value of the 'title' cookie
-        $title = $_COOKIE['title'];
-        // Expire the 'title' cookie
-        setcookie("title", "", time() - 3600, '/');
-        ?>
-        <div class="space">
-            <!-- Display a search box with a default value from the 'title' cookie -->
-            <div class="box container-fluid p-3">
-                <input type="text" class="form-control" autocomplete="off" id="liveSearch" placeholder="Search titles..." value="<?= $title ?>">
-            </div>
-            <!-- Display a container element for the search results -->
-            <div class="container-fluid" id="searchResult"></div>
-        </div>
+        <div class="container container-fluid p-4 m-5 shadow space">
+            <div class="text-white">
+                <!-- Form for adding data to a series -->
+                <form action="add-series-data.php" method="POST" autocomplete="off" id="addSeries">
 
+                    <!-- Input field for name of series -->
+                    <div class="p-2">
+                        <h5>Name: </h5>
+                        <input type="text" maxlength="200" class="form-control" name="name" id="name" required>
+                        <!-- Display for name error message -->
+                        <div id="nameError" class="text-danger"></div>
+                    </div>
+
+                    <!-- Input field for author -->
+                    <div class="p-2">
+                        <h5>Author: </h5>
+                        <input type="text" maxlength="200" class="form-control" name="author" id="author">
+                    </div>
+
+                    <!-- Select field for status of series -->
+                    <div class="p-2">
+                        <h5>Status:</h5>
+                        <select class="form-control" name="status" id="status">
+                            <option value="TBD">TBD</option>
+                            <option value="Ongoing">Ongoing</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Hiatus">Hiatus</option>
+                        </select>
+                    </div>
+
+                    <!-- Input field for latest chapter -->
+                    <div class="p-2">
+                        <h5>Latest chapter:</h5>
+                        <input type="text" maxlength="100" class="form-control" name="lChapter" id="lChapter">
+                    </div>
+
+                    <!-- Input field for genres -->
+                    <div class="p-2">
+                        <h5>Genres: </h5>
+                        <input type="text" maxlength="200" class="form-control" name="genre" id="genre">
+                    </div>
+
+                    <!-- Input field for image URL -->
+                    <div class="p-2">
+                        <h5>Image:</h5>
+                        <input type="url" maxlength="255" class="form-control" name="image" id="image">
+                        <!-- Message about image URL format -->
+                        <p><small>The links must end with the image format</small></p>
+                    </div>
+
+                    <!-- Textarea for description of series -->
+                    <div class="p-2">
+                        <h5>Description:</h5> <br>
+                        <textarea class="form-control formDescription" maxlength="2500" rows="5" id="textarea" name="description" ></textarea>
+                        <!-- Display for character count -->
+                        <div class="" id="count">
+                            <span id="current">0</span>
+                            <span id="maximum">/ 2500</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit button to send form data to server-side script -->
+                    <div class="container-fluid rounded p-3 text-center">
+                        <button type="submit" class="button rounded">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

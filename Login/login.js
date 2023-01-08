@@ -119,28 +119,94 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+$(document).ready(function () {
+    // jQuery code to submit the form data to the server
+    $("#createAccount").on('submit',function (e) {
+        // prevent the default form submission behavior
+        e.preventDefault();
 
-// jQuery code to submit the form data to the server
-$("#signup-form").submit(function(event) {
+        // get the values of the form input fields
+        const signupUsername = $("#signupUsername").val();
+        const signupEmail = $("#signupEmail").val();
+        const signupPassword = $("#signupPassword").val();
+        const signupConfirmPassword = $("#signupConfirmPassword").val();
 
-    event.preventDefault(); // Prevent the default form submission
-
-    // Create an AJAX request to submit the form data to the server
-    $.ajax({
-        type: "POST",
-        url: "/Login/registration.php",
-        data: $("#createAccount").serialize(), // Serialize the form data
-        success: function(response) {
-
-            // If the response is "error-username", shows the username error
-            if (response == "error-username") {
-                $("#errorUsername").show();
+        // Create an AJAX request to submit the form data to the server
+        $.ajax({
+            type: "POST",
+            url: "registration.php",
+            // send the form data as an object
+            data: {signupUsername:signupUsername,signupEmail:signupEmail,signupPassword:signupPassword,signupConfirmPassword:signupConfirmPassword},
+            success: function(data) {
+                // variable to store the input element that needs to be highlighted
+                let inputElement;
+                // check the data returned from the server and select the appropriate input field
+                if (data === "Username already exists") {
+                    inputElement=document.querySelector("#signupUsername");
+                }
+                else if (data === "Email already exists") {
+                    inputElement=document.querySelector("#signupEmail");
+                }else if (data === "Email is not valid") {
+                    inputElement=document.querySelector("#signupEmail");
+                }else if (data === "Username is not valid") {
+                    inputElement=document.querySelector("#signupUsername");
+                }else if (data === "Password must be between at least 8 characters long") {
+                    inputElement=document.querySelector("#signupPassword");
+                }else if (data === "Passwords are not matching") {
+                    inputElement = document.querySelector("#signupConfirmPassword");
+                }else if (data === "Failed to send to your mail"){
+                    inputElement = document.querySelector("#signupEmail");
+                }
+                // if no error messages are returned, show the success message
+                else {
+                    $(".formSuccessMessage").css("display","block").html((data));
+                }
+                // call the setInputError function to highlight the appropriate input field
+                setInputError(inputElement, data);
+                // clear the error message when the input field is changed
+                inputElement.addEventListener("input", e => {
+                    clearInputError(inputElement);
+                });
             }
-            // If the response is "error", display the error message
-            else if (response == "error-email") {
-                $("#errorEmail").show(); // Show the error message
+        });
+    });
+
+    // jQuery code to submit the login form data to the server
+    $("#login").on('submit',function (e) {
+        // prevent the default form submission behavior
+        e.preventDefault();
+
+        // get the values of the form input fields
+        const username = $("#username").val();
+        const password = $("#password").val();
+
+        // Create an AJAX request to submit the form data to the server
+        $.ajax({
+            type: "POST",
+            url: "login.php",
+            // send the form data as an object
+            data: {username:username,password:password},
+            success: function(data) {
+                // variable to store the input element that needs to be highlighted
+                let inputElement;
+                // check the data returned from the server and select the appropriate input field
+                if (data === "Incorrect Username/Email") {
+                    inputElement=document.querySelector("#username");
+                }else if (data === "Incorrect Password") {
+                    inputElement=document.querySelector("#password");
+                }
+                // if no error messages are returned, redirect to the profile page
+                else {
+                    window.location.replace("http://localhost/Profile/profile-page.php");
+                }
+
+                // call the setInputError function to highlight the appropriate input field
+                setInputError(inputElement, data);
+                // clear the error message when the input field is changed
+                inputElement.addEventListener("input", e => {
+                    clearInputError(inputElement);
+                });
             }
-        }
+        });
     });
 });
-

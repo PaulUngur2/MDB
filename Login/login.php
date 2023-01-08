@@ -7,40 +7,52 @@ global $mysqli;
 // Waiting until the data was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Checking if the data is submitted
-    if ( !isset($_POST['username'], $_POST['password']) ) {
-
-        exit('Please fill both the username and password fields');
-    }
-
-    // Preparing SQL
+    // Check if a user with the submitted username exists in the database
     if ($stmt = $mysqli->prepare('SELECT id, password, username FROM users WHERE username = ?')) {
 
-        // We bind a string, so we use s for the type
+        // Bind the submitted username as a string to the prepared statement
         $stmt->bind_param('s', $_POST['username']);
         $stmt->execute();
         $stmt->store_result();
         // Store the result, so we can check if the account exists in the database
 
-        // If there is a result we save the id and password
         if ($stmt->num_rows > 0) {
-
             $stmt->bind_result($id, $password, $username);
             $stmt->fetch();
 
-            // Verifying the passwords
+            // Verify that the submitted password matches the hashed password in the database
             if (password_verify($_POST['password'], $password)) {
-
+                // Set cookies to remember the login
                 setcookie("login", "$username", time() + 3600, "/");
                 setcookie("userid", $id, time() + 3600, "/");
-                header('Location: /Profile/profile-page.php');
             } else {
+                echo "Incorrect Password";
+            }
+        }
+        // If no user with the submitted username was found, check if a user with the submitted email exists
+        else if ($stmt = $mysqli->prepare('SELECT id, password, username FROM users WHERE email = ?')) {
 
-                echo 'Incorrect username and/or password!';
+            // Bind the submitted email as a string to the prepared statement
+            $stmt->bind_param('s', $_POST['username']);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($id, $password, $username);
+                $stmt->fetch();
+                // Verify that the submitted password matches the hashed password in the database
+                if (password_verify($_POST['password'], $password)) {
+                    // Set cookies to remember the login
+                    setcookie("login", "$username", time() + 3600, "/");
+                    setcookie("userid", $id, time() + 3600, "/");
+                } else {
+                    echo "Incorrect Password";
+                }
+            } else {
+                echo "Incorrect Username/Email";
             }
         } else {
-
-            echo 'Incorrect username and/or password!';
+            echo "Incorrect Username/Email";
         }
         $stmt->close();
     }

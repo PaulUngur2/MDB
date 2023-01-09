@@ -4,7 +4,7 @@
     <head>
         <!-- Page title -->
         <title>MDB</title>
-        !-- Favicon -->
+        <!-- Favicon -->
         <link rel="icon" href="../images/site-favicon.ico">
         <!-- Character encoding -->
         <meta charset="utf-8">

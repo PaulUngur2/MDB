@@ -23,7 +23,7 @@ $(document).ready(function () {
             data: {email:email},
             success: function (data) {
                 // Redirect to the reset-password-page.php script with the token in the URL
-                window.location.replace("http://localhost/Reset%20Passoword/reset-password-page.php?token="+data);
+                window.location.replace("http://localhost/Reset%20Password/reset-password-page.php?token="+data);
             }
 
         });

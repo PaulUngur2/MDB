@@ -29,7 +29,7 @@ if (isset($_POST['email'])){
             // Set up the email parameters
             $to = $email;
             $subject = "Password Reset";
-            $message = "Hello, <br> Here is the <a href='http://localhost/Reset%20Passoword/reset-password-page.php?token=$token'>link</a> to reset your password.<br><br>Best regards MangaDB staff team.";
+            $message = "Hello, <br> Here is the <a href='http://localhost/Reset%20Password/reset-password-page.php?token=$token'>link</a> to reset your password.<br><br>Best regards MangaDB staff team.";
             $headers = "From: mangadatab@gmail.com" . "\r\n" . "MIME-Version: 1.0" . "\r\n" . "Content-type: text/html; charset=utf-8";
 
             // Send the email

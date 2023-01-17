@@ -56,7 +56,7 @@ if(isset($_COOKIE["login"])) {
                 <button class="formButton" type="submit">Continue</button>
                 <!--Forgot Password Link-->
                 <p class="formText text-center mt-2">
-                    <a href="../Reset%20Passoword/forgot-password-page.php" class="formLink">Forgot your password?</a>
+                    <a href="../Reset%20Password/forgot-password-page.php" class="formLink">Forgot your password?</a>
                 </p>
                 <!--Create Account Link-->
                 <p class="formText text-center">
